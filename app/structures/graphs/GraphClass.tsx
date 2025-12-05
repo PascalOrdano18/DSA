@@ -44,6 +44,7 @@ export class Graph{
                                 x2={toNode.x}
                                 y2={toNode.y}
                                 stroke="black"
+                                strokeWidth={2}
                             />                 
                         })
                     })
