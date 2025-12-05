@@ -17,6 +17,8 @@ export class Graph{
     addNode(node: Node){
         this.nodes.set(node.id, node);
         this.adjacencies.set(node.id, []); // array vacio porque arranca sin vecinos
+
+        this.nodesAmount++;
     }
 
     addEdge(id1: number, id2: number){
