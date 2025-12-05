@@ -16,7 +16,7 @@ export class Node{
 
     draw(){
         return (
-            <g>
+            <g key={this.id}>
               <circle
                 cx={this.x}
                 cy={this.y}
