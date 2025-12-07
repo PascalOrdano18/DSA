@@ -103,7 +103,7 @@ export default function Home(){
                                 onClick={toggleTheme}
                                 className={`border-2 ${themeClasses.border} px-4 py-2 text-sm font-medium ${themeClasses.bg} ${themeClasses.text} ${themeClasses.hoverBg} ${themeClasses.hoverText} transition-all cursor-pointer`}
                             >
-                                {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
+                                {isDarkTheme ? 'Light' : 'Dark'}
                             </button>
                         </div>
                     </div>
