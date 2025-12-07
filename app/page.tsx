@@ -36,7 +36,10 @@ export default function Home(){
     const forceUpdate = () => setVersion(v => v + 1);
 
     const handleAddNode = () => {
-        graph.addNode(new Node(6,60, 200, 250))
+        graph.addNode(new Node(6,60, 400, 250))
+
+        graph.addEdge(6, 3);
+        graph.addEdge(6, 1)
         forceUpdate();
     }
 

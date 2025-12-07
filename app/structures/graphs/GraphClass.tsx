@@ -32,20 +32,30 @@ export class Graph{
                 {[...this.adjacencies.entries()].map(([fromNodeId, neighbors]) => {
                         const fromNode = this.nodes.get(fromNodeId);
                         if(!fromNode) return null;
+
+                        // Esta linea crea un Set a partir de neighbors (le saca repetidos), y usa el spread operator y crea un nuevo array.
+                        // sacamos repeditos de neighbors
+                        const uniqueNeighbors = [...new Set(neighbors)];
                         
-                        return neighbors.map((toNodeId) => {
+                        return uniqueNeighbors.map((toNodeId) => {
                             const toNode = this.nodes.get(toNodeId);
                             if(!toNode) return null;
+                            if(fromNodeId > toNodeId) return null;
 
-                           <line 
-                                key={`${fromNodeId} - ${toNodeId}`}
-                                x1={fromNode.x}
-                                y1={fromNode.y}
-                                x2={toNode.x}
-                                y2={toNode.y}
-                                stroke="black"
-                                strokeWidth={2}
-                            />                 
+                            const edgeKey = `${fromNodeId}-${toNodeId}`;
+
+                            return (
+                                <line 
+                                    key={edgeKey}
+                                    x1={fromNode.x}
+                                    y1={fromNode.y}
+                                    x2={toNode.x}
+                                    y2={toNode.y}
+                                    stroke="black"
+                                    strokeWidth={2}
+                                /> 
+                            )
+                                           
                         })
                     })
                 }
