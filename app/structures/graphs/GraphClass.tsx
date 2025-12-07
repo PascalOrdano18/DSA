@@ -26,7 +26,7 @@ export class Graph{
         this.adjacencies.get(id2)?.push(id1);
     }
 
-    draw(){
+    draw(forceUpdate: () => void){
         return(
             <svg width={600} height={600}>
                 {[...this.adjacencies.entries()].map(([fromNodeId, neighbors]) => {
@@ -50,9 +50,14 @@ export class Graph{
                     })
                 }
                 { 
-                    [...this.nodes.values()].map((node) => node.draw())
+                    [...this.nodes.values()].map((node) => node.draw(forceUpdate))
                 }
             </svg>
         )
+    }
+
+
+    bfs(){
+        
     }
 }

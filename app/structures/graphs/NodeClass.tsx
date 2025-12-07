@@ -1,27 +1,48 @@
 
+import { useState } from 'react';
+
+
+type Status = "free" | "visiting" | "visited";
 
 export class Node{
     id: number;
     value: number;
     x: number;
     y: number;
+    
+    status: Status | null;
 
-    constructor(id: number, value: number, x: number, y: number){
+    constructor(id: number, value: number, x: number, y: number, ){
         this.id = id;
         this.value = value;
         this.x = x;
         this.y = y;
+        this.status = "free";
     }
 
 
-    draw(){
+
+    handleClick = (forceUpdate: () => void) => {
+        if(this.status === "free") {
+            this.setVisited();
+        } else if (this.status === "visited") {
+            this.setFree();
+        }
+        forceUpdate();
+    }
+
+    draw(forceUpdate: () => void){
         return (
-            <g key={this.id}>
+            <g 
+                key={this.id} 
+                onClick={() => this.handleClick(forceUpdate) }
+                className='hover:cursor-pointer'
+            >
               <circle
                 cx={this.x}
                 cy={this.y}
                 r={20}
-                fill="lightblue"
+                fill = {this.status === "free" ? "lightblue" : this.status === "visiting" ? "blue" : "green"}
                 stroke="black"
                 strokeWidth={2}
               />
@@ -38,6 +59,18 @@ export class Node{
         )
     }
 
+
+    setFree(){
+        this.status = "free";
+    }
+    setVisiting(){
+        this.status = "visiting";
+    }
+    setVisited(){
+        this.status = "visited";
+    }
+    
+    
     
 
 }

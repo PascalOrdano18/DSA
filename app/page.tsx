@@ -7,36 +7,44 @@ import { Node } from './structures/graphs/NodeClass';
 export default function Home(){
     
     const graphRef = useRef(new Graph());    
+    const graph = graphRef.current;
     const [version, setVersion] = useState<number>(0);
 
 
-    graphRef.current.addNode(new Node(1, 10, 100, 100));
-    graphRef.current.addNode(new Node(2, 20, 200, 150));
-    graphRef.current.addNode(new Node(3, 30, 400, 100));
-    graphRef.current.addNode(new Node(4, 40, 100, 400));
-    graphRef.current.addNode(new Node(5, 50, 200, 300));
+   
+    const populateGraph = () => {
+        graph.addNode(new Node(1, 10, 100, 100));
+        graph.addNode(new Node(2, 20, 200, 150));
+        graph.addNode(new Node(3, 30, 400, 100));
+        graph.addNode(new Node(4, 40, 100, 400));
+        graph.addNode(new Node(5, 50, 200, 300));
 
-    graphRef.current.addEdge(1, 2);
-    graphRef.current.addEdge(2, 3);
-    graphRef.current.addEdge(1, 3);    
-    graphRef.current.addEdge(1, 4);    
-    graphRef.current.addEdge(2, 5);    
-    graphRef.current.addEdge(2, 3);    
-    graphRef.current.addEdge(4, 5);    
+        graph.addEdge(1, 2);
+        graph.addEdge(2, 3);
+        graph.addEdge(1, 3);    
+        graph.addEdge(1, 4);    
+        graph.addEdge(2, 5);    
+        graph.addEdge(2, 3);    
+        graph.addEdge(4, 5); 
+    }
 
+    
+    if (graph.nodesAmount === 0){
+        populateGraph();
+    }
+
+    const forceUpdate = () => setVersion(v => v + 1);
 
     const handleAddNode = () => {
-        graphRef.current.addNode(new Node(6,60, 200, 250))
-        //graphRef.current.draw();
-        setVersion(v => v + 1);
-
+        graph.addNode(new Node(6,60, 200, 250))
+        forceUpdate();
     }
 
      return (
         <div>
             Welcome to DSA
             <div className='bg-white w-full h-full'>
-                { graphRef.current.draw() }
+                { graph.draw(forceUpdate) }
             </div>
 
             <div>
