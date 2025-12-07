@@ -24,6 +24,7 @@ export default function Home(){
     const graph = graphRef.current;
     const [version, setVersion] = useState<number>(0);
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+    const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
    
     const populateGraph = () => {
@@ -65,24 +66,44 @@ export default function Home(){
         setSelectedTopic(null);
     }
 
+    const toggleTheme = () => {
+        setIsDarkTheme(!isDarkTheme);
+    }
+
+    const themeClasses = {
+        bg: isDarkTheme ? 'bg-black' : 'bg-white',
+        text: isDarkTheme ? 'text-white' : 'text-black',
+        border: isDarkTheme ? 'border-white' : 'border-black',
+        textMuted: isDarkTheme ? 'text-white/70' : 'text-black/70',
+        textMutedMore: isDarkTheme ? 'text-white/50' : 'text-black/50',
+        hoverBg: isDarkTheme ? 'hover:bg-white' : 'hover:bg-black',
+        hoverText: isDarkTheme ? 'hover:text-black' : 'hover:text-white',
+    }
+
     return (
-        <div className="min-h-screen bg-white text-black">
+        <div className={`min-h-screen ${themeClasses.bg} ${themeClasses.text} transition-colors duration-200`}>
             {/* Header Navigation */}
-            <header className="border-b border-black sticky top-0 bg-white z-50">
+            <header className={`border-b ${themeClasses.border} sticky top-0 ${themeClasses.bg} z-50 transition-colors duration-200`}>
                 <nav className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <button 
                             onClick={handleBackToHome}
-                            className="text-2xl font-bold tracking-tight hover:opacity-70 transition-opacity cursor-pointer"
+                            className={`text-2xl font-bold tracking-tight hover:opacity-70 transition-opacity cursor-pointer ${themeClasses.text}`}
                         >
                             DSA Visualizer
                         </button>
-                        <div className="flex gap-8">
-                            <button className="text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer">
+                        <div className="flex items-center gap-8">
+                            <button className={`text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer ${themeClasses.text}`}>
                                 Topics
                             </button>
-                            <button className="text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer">
+                            <button className={`text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer ${themeClasses.text}`}>
                                 About
+                            </button>
+                            <button
+                                onClick={toggleTheme}
+                                className={`border-2 ${themeClasses.border} px-4 py-2 text-sm font-medium ${themeClasses.bg} ${themeClasses.text} ${themeClasses.hoverBg} ${themeClasses.hoverText} transition-all cursor-pointer`}
+                            >
+                                {isDarkTheme ? '☀️ Light' : '🌙 Dark'}
                             </button>
                         </div>
                     </div>
@@ -95,11 +116,11 @@ export default function Home(){
                     <>
                         {/* Hero Section */}
                         <section className="mb-20">
-                            <h1 className="text-6xl font-bold mb-4 tracking-tight">
+                            <h1 className={`text-6xl font-bold mb-4 tracking-tight ${themeClasses.text}`}>
                                 Learn Data Structures<br />
                                 & Algorithms
                             </h1>
-                            <p className="text-xl text-black/70 max-w-2xl mt-6">
+                            <p className={`text-xl ${themeClasses.textMuted} max-w-2xl mt-6`}>
                                 Interactive visualizations to help you understand complex algorithms and data structures. 
                                 Explore, learn, and master computer science fundamentals.
                             </p>
@@ -107,18 +128,30 @@ export default function Home(){
 
                         {/* Topics Grid */}
                         <section>
-                            <h2 className="text-3xl font-bold mb-8">Explore Topics</h2>
+                            <h2 className={`text-3xl font-bold mb-8 ${themeClasses.text}`}>Explore Topics</h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {topics.map((topic) => (
                                     <button
                                         key={topic.id}
                                         onClick={() => handleTopicClick(topic.id)}
-                                        className="border-2 border-black p-6 text-left hover:bg-black hover:text-white transition-all cursor-pointer group"
+                                        className={`border-2 ${themeClasses.border} p-6 text-left transition-all cursor-pointer group ${themeClasses.bg} ${themeClasses.text} ${
+                                            isDarkTheme 
+                                                ? 'hover:bg-white hover:text-black' 
+                                                : 'hover:bg-black hover:text-white'
+                                        }`}
                                     >
-                                        <h3 className="text-xl font-bold mb-2 group-hover:text-white">
+                                        <h3 className={`text-xl font-bold mb-2 ${
+                                            isDarkTheme 
+                                                ? 'group-hover:text-black' 
+                                                : 'group-hover:text-white'
+                                        }`}>
                                             {topic.name}
                                         </h3>
-                                        <p className="text-sm text-black/70 group-hover:text-white/70">
+                                        <p className={`text-sm ${themeClasses.textMuted} ${
+                                            isDarkTheme 
+                                                ? 'group-hover:text-black/70' 
+                                                : 'group-hover:text-white/70'
+                                        }`}>
                                             {topic.description}
                                         </p>
                                     </button>
@@ -132,21 +165,21 @@ export default function Home(){
                         <div className="mb-8">
                             <button
                                 onClick={handleBackToHome}
-                                className="text-sm mb-4 hover:opacity-70 transition-opacity cursor-pointer inline-flex items-center gap-2"
+                                className={`text-sm mb-4 hover:opacity-70 transition-opacity cursor-pointer inline-flex items-center gap-2 ${themeClasses.text}`}
                             >
                                 ← Back to Topics
                             </button>
-                            <h2 className="text-4xl font-bold mb-2">Graphs</h2>
-                            <p className="text-black/70">
+                            <h2 className={`text-4xl font-bold mb-2 ${themeClasses.text}`}>Graphs</h2>
+                            <p className={themeClasses.textMuted}>
                                 Visualize graph structures and explore graph algorithms interactively.
                             </p>
                         </div>
-                        <div className="border-2 border-black p-8 bg-white">
+                        <div className={`border-2 ${themeClasses.border} p-8 ${isDarkTheme ? 'bg-black' : 'bg-white'} transition-colors duration-200`}>
                             {graph.draw(forceUpdate)}
                         </div>
                         <div className="mt-6">
                             <button 
-                                className='bg-black text-white border-2 border-black px-6 py-3 hover:bg-white hover:text-black transition-all cursor-pointer'
+                                className={`${isDarkTheme ? 'bg-white text-black' : 'bg-black text-white'} border-2 ${themeClasses.border} px-6 py-3 ${isDarkTheme ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'} transition-all cursor-pointer`}
                                 onClick={() => handleAddNode()}
                             >
                                 Add Node
@@ -159,19 +192,19 @@ export default function Home(){
                         <div className="mb-8">
                             <button
                                 onClick={handleBackToHome}
-                                className="text-sm mb-4 hover:opacity-70 transition-opacity cursor-pointer inline-flex items-center gap-2"
+                                className={`text-sm mb-4 hover:opacity-70 transition-opacity cursor-pointer inline-flex items-center gap-2 ${themeClasses.text}`}
                             >
                                 ← Back to Topics
                             </button>
-                            <h2 className="text-4xl font-bold mb-2">
+                            <h2 className={`text-4xl font-bold mb-2 ${themeClasses.text}`}>
                                 {topics.find(t => t.id === selectedTopic)?.name}
                             </h2>
-                            <p className="text-black/70">
+                            <p className={themeClasses.textMuted}>
                                 {topics.find(t => t.id === selectedTopic)?.description}
                             </p>
                         </div>
-                        <div className="border-2 border-black p-16 text-center">
-                            <p className="text-lg text-black/50">
+                        <div className={`border-2 ${themeClasses.border} p-16 text-center ${themeClasses.bg}`}>
+                            <p className={`text-lg ${themeClasses.textMutedMore}`}>
                                 Coming soon. This section is under development.
                             </p>
                         </div>
@@ -180,9 +213,9 @@ export default function Home(){
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-black mt-20">
+            <footer className={`border-t ${themeClasses.border} mt-20 transition-colors duration-200`}>
                 <div className="max-w-7xl mx-auto px-6 py-8">
-                    <p className="text-sm text-black/50">
+                    <p className={`text-sm ${themeClasses.textMutedMore}`}>
                         DSA Visualizer — Learn through visualization
                     </p>
                 </div>
