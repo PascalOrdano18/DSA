@@ -1,7 +1,3 @@
-
-import { useState } from 'react';
-
-
 type Status = "free" | "visiting" | "visited";
 
 export class Node{

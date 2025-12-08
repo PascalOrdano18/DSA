@@ -1,10 +1,10 @@
 'use client'
 import { useRef, useState } from 'react';
-import Link from 'next/link';
 import { Graph } from '../structures/graphs/GraphClass';
 import { Node } from '../structures/graphs/NodeClass';
 import { PageLayout } from '../components/PageLayout';
 import { useTheme } from '../components/ThemeProvider';
+import BackToHome from '../components/BackToHome';
 
 export default function GraphsPage(){
     const graphRef = useRef(new Graph());    
@@ -45,12 +45,7 @@ export default function GraphsPage(){
         <PageLayout>
             <section>
                 <div className="mb-8">
-                    <Link
-                        href="/"
-                        className={`text-sm mb-4 hover:opacity-70 transition-opacity cursor-pointer inline-flex items-center gap-2 ${themeClasses.text}`}
-                    >
-                        ← Back to Topics
-                    </Link>
+                    <BackToHome /> 
                     <h2 className={`text-4xl font-bold mb-2 ${themeClasses.text}`}>Graphs</h2>
                     <p className={themeClasses.textMuted}>
                         Visualize graph structures and explore graph algorithms interactively.
