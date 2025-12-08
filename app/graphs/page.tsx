@@ -8,6 +8,7 @@ import BackToHome from '../components/BackToHome';
 
 export default function GraphsPage(){
     const graphRef = useRef(new Graph());    
+    const svgRef = useRef<SVGSVGElement>(null);
     const graph = graphRef.current;
     const [version, setVersion] = useState<number>(0);
     const { themeClasses, isDarkTheme } = useTheme();

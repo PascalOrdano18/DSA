@@ -1,5 +1,5 @@
 
-import Node from './NodeClass'
+import { Node } from './NodeClass'
 
 export class Graph{
     nodesAmount: number;
