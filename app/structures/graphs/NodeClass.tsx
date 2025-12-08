@@ -9,6 +9,8 @@ export class Node{
     value: number;
     x: number;
     y: number;
+
+    isDragging: boolean;
     
     status: Status | null;
 
@@ -18,6 +20,7 @@ export class Node{
         this.x = x;
         this.y = y;
         this.status = "free";
+        this.isDragging = false;
     }
 
 
@@ -30,6 +33,7 @@ export class Node{
         }
         forceUpdate();
     }
+
 
     draw(forceUpdate: () => void){
         return (
@@ -57,6 +61,14 @@ export class Node{
               </text>
             </g>
         )
+    }
+
+
+    setX(x: number){
+        this.x = x;
+    }
+    setY(y: number){
+        this.y = y;
     }
 
 
