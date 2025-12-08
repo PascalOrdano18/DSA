@@ -30,6 +30,13 @@ export class Node{
         forceUpdate();
     }
 
+    handleDrag(e: React.MouseEvent<SVGGElement, MouseEvent>, forceUpdate: () => void){  
+        if(!this.isDragging) return;
+        this.x = e.nativeEvent.offsetX;
+        this.y = e.nativeEvent.offsetY;
+        forceUpdate();
+    }
+
 
     draw(forceUpdate: () => void){
         return (
@@ -37,6 +44,9 @@ export class Node{
                 key={this.id} 
                 onClick={() => this.handleClick(forceUpdate) }
                 className='hover:cursor-pointer'
+                onMouseDown={() => this.isDragging = true}
+                onMouseMove={e => this.handleDrag(e, forceUpdate)}
+                onMouseUp={() => this.isDragging = false} 
             >
               <circle
                 cx={this.x}
