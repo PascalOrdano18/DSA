@@ -29,6 +29,12 @@ export default function ArraysPage() {
         setAddValue(null);
     }
 
+
+    const delValue = () => {
+        array.deleteValue();
+        setForceUpdate(v => v + 1);
+    }
+
     return (
         <PageLayout>
             <section>
@@ -39,7 +45,7 @@ export default function ArraysPage() {
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                     {/* Left Column - Array Visualization and Controls */}
                     <div className='flex flex-col gap-6'>
-                        <div>
+                        <div onClick={() => setForceUpdate(v => v + 1)}>
                             { array.draw() }
                         </div>
                         
@@ -70,6 +76,10 @@ export default function ArraysPage() {
                             }}>
                                 Random Populate
                             </button> 
+
+                            <button onClick={() => delValue()}>
+                                Delete
+                            </button>
                         </div>
                     </div>
 
