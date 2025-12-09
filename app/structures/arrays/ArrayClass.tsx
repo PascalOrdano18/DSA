@@ -22,9 +22,14 @@ export class Array{
     }
 
     populate(){
-        if(this.array[0]) return ;
         for(let i = 0; i < this.length; i++){
             this.setValue(i, i);
+        }
+    }
+
+    populateRandom(){
+        for(let i = 0; i < this.length; i++){
+            this.setValue(i, Math.floor(Math.random() * 10));
         }
     }
 

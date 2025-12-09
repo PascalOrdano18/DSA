@@ -57,6 +57,19 @@ export default function ArraysPage() {
                             >
                                 Agregar
                             </button>
+
+                            <button onClick={() => {
+                                array.populate();
+                                setForceUpdate(v => v + 1);
+                            }}>
+                                Populate
+                            </button> 
+                            <button onClick={() => {
+                                array.populateRandom();
+                                setForceUpdate(v => v + 1);
+                            }}>
+                                Random Populate
+                            </button> 
                         </div>
                     </div>
 
