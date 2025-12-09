@@ -22,9 +22,12 @@ export function Header() {
             >
               Topics
             </Link>
-            <button className={`text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer ${themeClasses.text}`}>
+            <Link 
+              href="/about"
+              className={`text-sm font-medium hover:opacity-70 transition-opacity cursor-pointer ${themeClasses.text}`}
+            >
               About
-            </button>
+            </Link>
             <button
               onClick={toggleTheme}
               className={`border-2 ${themeClasses.border} px-4 py-2 text-sm font-medium ${themeClasses.bg} ${themeClasses.text} ${themeClasses.hoverBg} ${themeClasses.hoverText} transition-all cursor-pointer`}
