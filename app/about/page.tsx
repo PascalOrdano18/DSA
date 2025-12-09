@@ -45,7 +45,7 @@ export default function AboutPage() {
                     </p>
 
                     <ul className={`list-disc list-inside space-y-3 ml-4 ${themeClasses.textMuted}`}>
-                        <li><span className="font-medium">Matemática Discreta</span> — understanding the mathematical foundations</li>
+                        <li><span className="font-medium">Discrete Mathematics</span> — understanding the mathematical foundations</li>
                         <li><span className="font-medium">Imperative Programming</span> — mastering the fundamentals</li>
                         <li><span className="font-medium">Object-Oriented Programming</span> — building robust structures</li>
                         <li><span className="font-medium">Data Structures & Algorithms</span> — the core of computer science</li>
@@ -75,11 +75,41 @@ export default function AboutPage() {
                         is by building, sharing, and iterating together.
                     </p>
 
-                    <div className={`mt-12 p-6 rounded-lg border-2 ${themeClasses.border} ${themeClasses.bg}`}>
-                        <p className={`${themeClasses.text} text-center`}>
-                            <span className="font-semibold">Happy learning!</span> 🚀
-                        </p>
+                    <h2 className={`text-3xl font-bold mt-12 mb-6 ${themeClasses.text}`}>
+                        Check Us Out on GitHub
+                    </h2>
+
+                    <p className={themeClasses.textMuted}>
+                        You can find us and our other projects on GitHub:
+                    </p>
+
+                    <div className={`mt-6 space-y-3 ${themeClasses.textMuted}`}>
+                        <a 
+                            href="https://github.com/PascalOrdano18" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className={`block hover:opacity-70 transition-opacity ${themeClasses.text} underline`}
+                        >
+                            PascalOrdano18
+                        </a>
+                        <a 
+                            href="https://github.com/BautistaPessagno" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className={`block hover:opacity-70 transition-opacity ${themeClasses.text} underline`}
+                        >
+                            BautistaPessagno
+                        </a>
                     </div>
+
+                    <h2 className={`text-3xl font-bold mt-12 mb-6 ${themeClasses.text}`}>
+                        Contact
+                    </h2>
+
+                    <p className={themeClasses.textMuted}>
+                        Have questions, suggestions, or want to collaborate? Feel free to reach out to us through GitHub or drop us a message. 
+                        We're always open to feedback and discussions!
+                    </p>
                 </div>
 
                 {/* Back to Home */}
