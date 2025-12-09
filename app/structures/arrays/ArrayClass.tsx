@@ -29,16 +29,13 @@ export class Array{
 
         if(id === null || id < 0 || id >= this.length) return ;
 
-        // Shift all elements after the deleted index one position to the left
         for(let i = id; i < this.length - 1; i++){
             this.array[i] = this.array[i + 1];
         }
         
-        // Remove the last element and update length
         this.array.pop();
         this.length = this.length - 1;
         
-        // Reset currentId after deletion
         this.currentId = null;
     }
 
@@ -86,8 +83,8 @@ export class Array{
                             y={20}
                             width={60}
                             height={40}
-                            fill="white"
-                            stroke={id === this.currentId ? "green" : "black"}
+                            fill={id === this.currentId ? "#B3FFCC" : "white"}
+                            stroke={id === this.currentId ? "#00CC66" : "black"}
                         />
                         <text
                             x={id * 60 + 30} 

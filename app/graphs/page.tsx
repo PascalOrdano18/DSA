@@ -5,6 +5,7 @@ import { Node } from '../structures/graphs/NodeClass';
 import { PageLayout } from '../components/PageLayout';
 import { useTheme } from '../components/ThemeProvider';
 import BackToHome from '../components/BackToHome';
+import CodeSnippet from '../components/CodeSnippet';
 
 export default function GraphsPage(){
     const graphRef = useRef(new Graph());    
@@ -52,16 +53,27 @@ export default function GraphsPage(){
                         Visualize graph structures and explore graph algorithms interactively.
                     </p>
                 </div>
-                <div className={`border-2 ${themeClasses.border} p-8 ${isDarkTheme ? 'bg-black' : 'bg-white'} transition-colors duration-200`}>
-                    {graph.draw(forceUpdate)}
-                </div>
-                <div className="mt-6">
-                    <button 
-                        className={`${isDarkTheme ? 'bg-white text-black' : 'bg-black text-white'} border-2 ${themeClasses.border} px-6 py-3 ${isDarkTheme ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'} transition-all cursor-pointer`}
-                        onClick={() => handleAddNode()}
-                    >
-                        Add Node
-                    </button>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Left Column - Graph Visualization and Controls */}
+                    <div className="flex flex-col gap-6">
+                        <div className={`border-2 ${themeClasses.border} p-6 ${isDarkTheme ? 'bg-black' : 'bg-white'} transition-colors duration-200`}>
+                            {graph.draw(forceUpdate)}
+                        </div>
+                        <div className="flex flex-wrap gap-4 items-center">
+                            <button 
+                                className={`${isDarkTheme ? 'bg-white text-black' : 'bg-black text-white'} border-2 ${themeClasses.border} px-6 py-3 rounded ${isDarkTheme ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'} transition-all cursor-pointer`}
+                                onClick={() => handleAddNode()}
+                            >
+                                Add Node
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Right Column - Code Snippet */}
+                    <div className='flex flex-col'>
+                        <CodeSnippet code='aca va el codigo del grafo' />
+                    </div>
                 </div>
             </section>
         </PageLayout>
