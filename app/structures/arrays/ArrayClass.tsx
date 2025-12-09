@@ -28,6 +28,19 @@ export class Array{
         }
     }
 
+    code(){
+        const code = `
+            populate(){
+                if(this.array[0]) return ;
+                for(let i = 0; i < this.length; i++){
+                    this.setValue(i, i);
+                }
+            } 
+        `
+
+        return code;
+    }
+
     draw(){
         return (
             <svg width={600} height={600}>
