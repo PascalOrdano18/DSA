@@ -57,15 +57,28 @@ export class Array{
         this.currentId = null;
     }
 
-    code(){
-        const code = `
-            populate(){
+    code(language: string){
+        let code;
+        switch (language) {
+            case "typescript":
+                code = `            populate(){
                 if(this.array[0]) return ;
                 for(let i = 0; i < this.length; i++){
                     this.setValue(i, i);
                 }
-            } 
-        `
+            } `;
+                break;
+            case "C":
+                code = `           populateRandom(){
+                for(let i = 0; i < this.length; i++){
+                    this.setValue(i, Math.floor(Math.random() * 10));
+                }
+                this.currentId = null;
+            }`;
+                break;
+            default:
+                break;
+        }
 
         return code;
     }
@@ -76,6 +89,7 @@ export class Array{
                 {this.array.map((value, id) => (
                     <g 
                         key={id}
+                        className="hover:cursor-pointer"
                         onClick={() => this.currentId = id}
                     >
                         <rect

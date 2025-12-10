@@ -103,7 +103,11 @@ export default function ArraysPage() {
 
                     {/* Right Column - Code Snippet */}
                     <div className="flex flex-col">
-                        <CodeSnippet code={array.code()} />
+                        <CodeSnippet 
+                            code={(lang) => array.code(lang) || ''}
+                            language="typescript"
+                            availableLanguages={['typescript', 'C']}
+                        />
                     </div>
                 </div>
             </section>

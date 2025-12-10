@@ -1,26 +1,43 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from './ThemeProvider';
 
 interface CodeSnippetProps {
-  code: string;
+  code: string | ((language: string) => string);
   language?: string;
   showLineNumbers?: boolean;
   title?: string;
+  availableLanguages?: string[];
 }
 
 export default function CodeSnippet({ 
   code, 
   language = 'javascript',
   showLineNumbers = true,
-  title 
+  title,
+  availableLanguages
 }: CodeSnippetProps) {
   const { themeClasses, isDarkTheme } = useTheme();
   const [copied, setCopied] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState(language);
+
+  // Sync selectedLanguage when language prop changes
+  useEffect(() => {
+    setSelectedLanguage(language);
+  }, [language]);
+
+  // Determine if code is a function or a string
+  const isCodeFunction = typeof code === 'function';
+  
+  // Get the actual code to display
+  const displayCode = isCodeFunction ? (code(selectedLanguage) || '') : code;
+  
+  // Show language selector if availableLanguages is provided and has options
+  const showLanguageSelector = availableLanguages && availableLanguages.length > 0;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(code);
+      await navigator.clipboard.writeText(displayCode);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -28,7 +45,7 @@ export default function CodeSnippet({
     }
   };
 
-  const lines = code.split('\n');
+  const lines = displayCode.split('\n');
   const maxLineNumberWidth = lines.length.toString().length;
 
   return (
@@ -41,9 +58,27 @@ export default function CodeSnippet({
               {title}
             </span>
           )}
-          <span className={`text-xs px-2 py-1 rounded ${isDarkTheme ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'}`}>
-            {language}
-          </span>
+          {showLanguageSelector ? (
+            <select
+              value={selectedLanguage}
+              onChange={(e) => setSelectedLanguage(e.target.value)}
+              className={`text-xs px-2 py-1 rounded border ${themeClasses.border} ${
+                isDarkTheme 
+                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              } cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            >
+              {(availableLanguages || []).map((lang) => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <span className={`text-xs px-2 py-1 rounded ${isDarkTheme ? 'bg-gray-800 text-gray-300' : 'bg-gray-200 text-gray-700'}`}>
+              {selectedLanguage}
+            </span>
+          )}
         </div>
         <button
           onClick={handleCopy}
