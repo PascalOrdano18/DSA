@@ -43,6 +43,10 @@ export default function GraphsPage(){
         forceUpdate();
     }
 
+    const handleAddEdge = () => {
+        console.log("Add edge");
+    }
+
     return (
         <PageLayout>
             <section>
@@ -66,6 +70,12 @@ export default function GraphsPage(){
                                 onClick={() => handleAddNode()}
                             >
                                 Add Node
+                            </button>
+                            <button 
+                                className={`${isDarkTheme ? 'bg-white text-black' : 'bg-black text-white'} border-2 ${themeClasses.border} px-6 py-3 rounded ${isDarkTheme ? 'hover:bg-black hover:text-white' : 'hover:bg-white hover:text-black'} transition-all cursor-pointer`}
+                                onClick={() => handleAddEdge()}
+                            >
+                                Add Edge
                             </button>
                         </div>
                     </div>

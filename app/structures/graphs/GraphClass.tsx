@@ -6,7 +6,7 @@ export class Graph{
     nodes: Map<number, Node>;
     adjacencies: Map<number, number[]>;
 
-
+    
     constructor(){
         this.nodesAmount = 0;
         this.adjacencies = new Map();

@@ -1,5 +1,3 @@
-
-
 export class Array{
     length: number;
     array: number[];
@@ -17,10 +15,11 @@ export class Array{
     }
 
     setValue(id: number, value: number){
-        if(id >= this.length){
-            console.log("LOCO TE PASASTE CON EL ARRAY");
+        if(id < 0 || id >= this.length){
+            console.log("Error: Index out of bounds");
+            return; // Stop here, don't set the value
         }
-        
+
         this.array[id] = value;
     }
 
@@ -69,12 +68,11 @@ export class Array{
             } `;
                 break;
             case "C":
-                code = `           populateRandom(){
-                for(let i = 0; i < this.length; i++){
-                    this.setValue(i, Math.floor(Math.random() * 10));
-                }
-                this.currentId = null;
-            }`;
+                code = `void populate(int* array, int length) {
+    for(int i = 0; i < length; i++) {
+        array[i] = i;
+    }
+}`;
                 break;
             default:
                 break;
